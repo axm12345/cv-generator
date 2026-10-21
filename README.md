@@ -14,7 +14,7 @@
 3. Click **+ Add** under Experience or Projects to add entries.
 4. Use the **← →** arrows above the CV to switch between the 4 templates.
 5. Click any section of the CV to change its font, size or colour, or move it up or down.
-6. Click **Download PDF**.
+6. Click **Download as PDF**.
 
 ## Features
 
