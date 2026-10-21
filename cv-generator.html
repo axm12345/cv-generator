@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Generator</title>
+<link rel="stylesheet" href="cv-style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- FORM SIDE -->
+  <div class="form-panel">
+    <h1>Build Your CV</h1>
+    <p class="hint">Fill in what applies to you. Click any section in the preview to restyle it. Empty sections just won't show up.</p>
+
+    <div class="field-group">
+      <h2>Basics</h2>
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Jane Doe">
+
+      <label>Tagline / Field</label>
+      <input type="text" id="tagline" placeholder="e.g. Computer Science Student">
+
+      <label>Email</label>
+      <input type="text" id="email" placeholder="jane@email.com">
+
+      <label>Phone</label>
+      <input type="text" id="phone" placeholder="(optional)">
+
+      <label>University / School</label>
+      <input type="text" id="school" placeholder="(optional)">
+
+      <label>Photo</label>
+      <input type="file" id="photoInput" accept="image/*">
+
+      <label>Short Bio</label>
+      <textarea id="bio" rows="3" placeholder="A couple sentences about you (optional)"></textarea>
+    </div>
+
+    <div class="field-group">
+      <div class="field-header">
+        <h2>Experience</h2>
+        <button class="add-btn" onclick="addEntry('experience')">+ Add</button>
+      </div>
+      <div id="experienceList"></div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-header">
+        <h2>Projects</h2>
+        <button class="add-btn" onclick="addEntry('projects')">+ Add</button>
+      </div>
+      <div id="projectsList"></div>
+    </div>
+
+    <div class="field-group">
+      <label>Skills (comma separated)</label>
+      <input type="text" id="skills" placeholder="Python, JavaScript, Arduino">
+    </div>
+
+    <div class="field-group">
+      <h2>Page Style</h2>
+      <label>Background Color</label>
+      <input type="color" id="bgColorPicker" value="#ffffff">
+    </div>
+
+    <button id="downloadBtn" class="download-btn">⬇ Download as PDF</button>
+  </div>
+
+  <!-- PREVIEW SIDE -->
+  <div class="preview-panel">
+
+    <div class="template-switcher">
+      <button id="prevTemplate" class="tpl-arrow">←</button>
+      <span id="templateName">Coral Diagonal</span>
+      <button id="nextTemplate" class="tpl-arrow">→</button>
+    </div>
+
+    <!-- Floating style toolbar, shown when a section is selected -->
+    <div id="styleToolbar" class="style-toolbar hidden">
+      <div class="toolbar-row">
+        <label>Font</label>
+        <select id="fontSelect">
+          <option value="'Segoe UI', Arial, sans-serif">Segoe UI</option>
+          <option value="Georgia, serif">Georgia</option>
+          <option value="'Courier New', monospace">Courier New</option>
+          <option value="Verdana, sans-serif">Verdana</option>
+          <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+        </select>
+      </div>
+      <div class="toolbar-row">
+        <label>Size</label>
+        <input type="range" id="sizeSlider" min="70" max="160" value="100">
+      </div>
+      <div class="toolbar-row">
+        <label>Color</label>
+        <input type="color" id="colorPicker" value="#222222">
+      </div>
+      <div class="toolbar-row order-row">
+        <button id="moveUpBtn">▲ Up</button>
+        <button id="moveDownBtn">▼ Down</button>
+      </div>
+      <div class="toolbar-row">
+        <label>&nbsp;</label>
+        <button id="resetSectionBtn">Reset Section</button>
+      </div>
+    </div>
+
+    <div id="resumeWrapper" class="resume-wrapper">
+      <div id="resume" class="resume" data-template="0">
+        <div class="resume-header" id="resumeHeader">
+          <div>
+            <div class="r-name" id="pName">Your Name</div>
+            <div class="r-tagline" id="pTagline">Your tagline appears here</div>
+            <div class="r-contact" id="pContact"></div>
+          </div>
+          <img id="pPhoto" class="r-photo" style="display:none;">
+        </div>
+        <div id="resumeBodyScale" class="resume-body-scale">
+          <div id="resumeBody" class="resume-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="fillPageBox" class="fill-page-box hidden">
+      <label>
+        <input type="checkbox" id="fillPageCheckbox">
+        Your resume has extra space below — want it to fill the page?
+      </label>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="cv-script.js"></script>
+</body>
+</html>
